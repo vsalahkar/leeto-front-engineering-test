@@ -1,21 +1,49 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import axios from 'axios'
+import Configuration from '../configuration'
+import './App.css'
 
-class App extends Component {
-  render() {
+function App() {
+    const [emailInput, setEmailInput] = useState('')
+    const [passwordInput, setPasswordInput] = useState('')
+    const [data, setData] = useState([])
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+
+        try {
+            const result = await axios.post(`${Configuration.apiUrl}/auth/sign_in`, {
+                email: emailInput,
+                password: passwordInput
+            })
+            setData(result.data)
+            console.log(result)
+        } catch (error) {
+            console.error('Authentication failed', error)
+        }
+    }
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+        <main>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>
+                        Professional email
+                        <input type="email" value={emailInput} name="email"
+                               onChange={(event) => setEmailInput(event.target.value)}/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Password
+                        <input type="password" value={passwordInput} name="password"
+                               onChange={(event) => setPasswordInput(event.target.value)}/>
+                    </label>
+                </div>
+                <button type="submit" onClick={handleSubmit}>Sign in</button>
+            </form>
+        </main>
+    )
 }
 
-export default App;
+export default App
