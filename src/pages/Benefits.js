@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Heading from '../components/Heading';
 
 function Benefits() {
-    return (
-        <h1>Benefits :)</h1>
-    )
+  return (
+    <Fragment>
+      <Heading>Benefits :)</Heading>
+    </Fragment>
+  );
 }
 
-export default Benefits
+export default Benefits;
