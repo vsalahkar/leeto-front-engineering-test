@@ -15,7 +15,7 @@ const StyledButton = styled.button`
 
 function Button(props) {
   return (
-    <StyledButton>
+    <StyledButton className={props.className}>
       {props.buttonLabel}
     </StyledButton>
   )

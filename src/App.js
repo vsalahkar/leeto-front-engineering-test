@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import UserContext from './UserContext';
-import './App.css';
 
 import PrivateRoute from './routing/PrivateRoute';
 import Benefits from './pages/Benefits';
