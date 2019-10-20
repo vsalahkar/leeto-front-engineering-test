@@ -5,7 +5,7 @@ import appTheme from '../theme/colors';
 import axios from 'axios';
 import Configuration from '../../configuration';
 import UserContext from '../UserContext';
-import Benefit from '../components/Benefit';
+import BenefitView from '../components/BenefitView';
 
 const BenefitsPage = styled.section`
   height: 100%;
@@ -38,7 +38,7 @@ function Benefits() {
   const [benefits, setBenefits] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { headers } = useContext(UserContext);
+  const { headers, setHeaders } = useContext(UserContext);
 
   useEffect(() => {
     function fetchData() {
@@ -48,7 +48,11 @@ function Benefits() {
           headers,
         })
         .then((response) => {
-          setBenefits(response.data);
+          const benefitsData = response.data;
+          const refreshedHeaders = response.config.headers;
+
+          setBenefits(benefitsData);
+          setHeaders(refreshedHeaders);
         })
         .catch((error) => {
           console.error('Fetching benefits list failed', error);
@@ -73,7 +77,7 @@ function Benefits() {
           ) : (
             <BenefitList>
               {benefits.map((item) => (
-                <Benefit key={item.name} title={item.name} description={item.description} />
+                <BenefitView key={item.name} benefit={item} />
               ))}
             </BenefitList>
           )}

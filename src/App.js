@@ -5,6 +5,7 @@ import UserContext from './UserContext';
 import PrivateRoute from './routing/PrivateRoute';
 import Benefits from './pages/Benefits';
 import SignIn from './pages/SignIn';
+import Benefit from './pages/Benefit';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,7 +16,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/sign-in" component={SignIn} />
-          <PrivateRoute path="/benefits" component={Benefits} />
+          <PrivateRoute exact path="/benefits" component={Benefits} />
+          <PrivateRoute path="/benefits/:slug" component={Benefit} />
           <Redirect to="/benefits" />
         </Switch>
       </Router>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
+import { Link } from 'react-router-dom';
 
 const StyledBenefit = styled.li`
   margin-bottom: 24px;
@@ -36,23 +37,29 @@ const BenefitHeading = styled.div`
   }
 `;
 
-const BenefitInformation = styled.div``;
+const BenefitInformation = styled.div`
+  padding: 16px;
+`;
 
-function Benefit({ title, description }) {
+function BenefitView({ benefit: { name, description, slug, currentPeriod: {numberOfParticipant} } }) {
   return (
     <StyledBenefit>
       <BenefitHeader>
         <BenefitHeading>
-          <h1>{title}</h1>
+          <Link to={`/benefits/${slug}`}>
+            <h1>{name}</h1>
+          </Link>
           <p>{description}</p>
         </BenefitHeading>
         <button>
           <i className="material-icons">keyboard_arrow_down</i>
         </button>
       </BenefitHeader>
-      <BenefitInformation></BenefitInformation>
+      <BenefitInformation>
+        <p>{numberOfParticipant}</p>
+      </BenefitInformation>
     </StyledBenefit>
   );
 }
 
-export default Benefit;
+export default BenefitView;
