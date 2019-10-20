@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-const Heading = styled.h1`
-  margin-bottom: 24px;
-  color: ${(props) => props.theme.secondaryColor};
+const StyledHeading = styled.h1`
+  color: ${(props) => (props.primary ? props.theme.baseColorLight : props.theme.secondaryColor)};
 `;
 
-export default Heading;
+export default StyledHeading;

@@ -24,6 +24,10 @@ const SignInFormSection = styled.section`
   flex-direction: column;
 `;
 
+const SignInFormHeading = styled(Heading)`
+  margin-bottom: 24px;
+`;
+
 const SignInForm = styled.form`
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -87,7 +91,7 @@ function SignIn() {
       <ThemeProvider theme={appTheme}>
         <SignInPage>
           <SignInFormSection>
-            <Heading>Sign in</Heading>
+            <SignInFormHeading secondary>Sign in</SignInFormHeading>
             <SignInForm onSubmit={handleSubmit}>
               <SignInFormLabel>
                 Email

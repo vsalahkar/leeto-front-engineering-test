@@ -4,10 +4,10 @@ import Configuration from '../../configuration';
 import UserContext from '../UserContext';
 
 function Benefit({
-  match: {
-    params: { slug },
-  },
-}) {
+                   match: {
+                     params: { slug },
+                   },
+                 }) {
   const [isLoading, setIsLoading] = useState(true);
   const [benefit, setBenefit] = useState(null);
 
@@ -21,8 +21,8 @@ function Benefit({
           headers,
         })
         .then((response) => {
-          const benefitData = response.data
-          const refreshedHeaders = response.config.headers
+          const benefitData = response.data;
+          const refreshedHeaders = response.config.headers;
 
           setBenefit(benefitData);
           setHeaders(refreshedHeaders);
@@ -38,7 +38,13 @@ function Benefit({
     fetchData();
   }, []);
 
-  return <div>{isLoading ? <div>Loading ...</div> : <span>{JSON.stringify(benefit, 0, 2)}</span>}</div>;
+  return (
+    <div>{
+      isLoading ?
+        <div>Loading ...</div> :
+        <span>{JSON.stringify(benefit, 0, 2)}</span>}
+    </div>
+  );
 }
 
 export default Benefit;

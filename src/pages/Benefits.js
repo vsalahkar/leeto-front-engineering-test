@@ -1,11 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Heading from '../components/Heading';
 import styled, { ThemeProvider } from 'styled-components';
-import appTheme from '../theme/colors';
 import axios from 'axios';
 import Configuration from '../../configuration';
 import UserContext from '../UserContext';
-import BenefitView from '../components/BenefitView';
+import BenefitListItem from '../components/BenefitListItem';
 
 const BenefitsPage = styled.section`
   height: 100%;
@@ -13,8 +12,7 @@ const BenefitsPage = styled.section`
   display: flex;
   flex-direction: column;
 
-  & > header,
-  & > main {
+  & > header {
     padding: 16px 24px;
   }
 
@@ -24,8 +22,12 @@ const BenefitsPage = styled.section`
   }
 `;
 
+const BenefitsPageHeader = styled.header`
+  background-color: ${(props) => props.theme.primaryColor};
+`;
+
 const BenefitsContainer = styled.main`
-  padding: 16px 24px;
+  padding: 24px;
 `;
 
 const BenefitList = styled.ul`
@@ -50,7 +52,7 @@ function Benefits() {
         .then((response) => {
           const benefitsData = response.data;
           const refreshedHeaders = response.config.headers;
-
+          console.log(response.data);
           setBenefits(benefitsData);
           setHeaders(refreshedHeaders);
         })
@@ -66,24 +68,22 @@ function Benefits() {
   }, []);
 
   return (
-    <ThemeProvider theme={appTheme}>
-      <BenefitsPage>
-        <header>
-          <Heading>Benefits</Heading>
-        </header>
-        <BenefitsContainer>
-          {isLoading ? (
-            <div>Loading ...</div>
-          ) : (
-            <BenefitList>
-              {benefits.map((item) => (
-                <BenefitView key={item.name} benefit={item} />
-              ))}
-            </BenefitList>
-          )}
-        </BenefitsContainer>
-      </BenefitsPage>
-    </ThemeProvider>
+    <BenefitsPage>
+      <BenefitsPageHeader>
+        <Heading primary>Benefits</Heading>
+      </BenefitsPageHeader>
+      <BenefitsContainer>
+        {isLoading ? (
+          <div>Benefits list is loading ...</div>
+        ) : (
+          <BenefitList>
+            {benefits.map((item) => (
+              <BenefitListItem key={item.name} benefit={item} />
+            ))}
+          </BenefitList>
+        )}
+      </BenefitsContainer>
+    </BenefitsPage>
   );
 }
 
