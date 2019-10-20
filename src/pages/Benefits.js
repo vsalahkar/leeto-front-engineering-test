@@ -5,6 +5,7 @@ import appTheme from '../theme/colors';
 import axios from 'axios';
 import Configuration from '../../configuration';
 import UserContext from '../UserContext';
+import Benefit from '../components/Benefit';
 
 const BenefitsPage = styled.section`
   height: 100%;
@@ -12,18 +13,25 @@ const BenefitsPage = styled.section`
   display: flex;
   flex-direction: column;
 
-  header,
-  main {
+  & > header,
+  & > main {
     padding: 16px 24px;
   }
 
   main {
     flex: 1;
+    overflow: auto;
   }
 `;
 
 const BenefitsContainer = styled.main`
   padding: 16px 24px;
+`;
+
+const BenefitList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function Benefits() {
@@ -57,17 +65,17 @@ function Benefits() {
     <ThemeProvider theme={appTheme}>
       <BenefitsPage>
         <header>
-          <Heading>Benefits :)</Heading>
+          <Heading>Benefits</Heading>
         </header>
         <BenefitsContainer>
           {isLoading ? (
             <div>Loading ...</div>
           ) : (
-            <ul>
+            <BenefitList>
               {benefits.map((item) => (
-                <li key={item.name}>{item.name}</li>
+                <Benefit key={item.name} title={item.name} description={item.description} />
               ))}
-            </ul>
+            </BenefitList>
           )}
         </BenefitsContainer>
       </BenefitsPage>

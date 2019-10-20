@@ -27,7 +27,7 @@ const SignInFormSection = styled.section`
 const SignInForm = styled.form`
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.baseColorLight};
   padding: 24px;
   max-width: 300px;
   width: 100%;
