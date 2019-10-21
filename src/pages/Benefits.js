@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Heading from '../components/Heading';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
+
 import Configuration from '../../configuration';
+
 import UserContext from '../UserContext';
+
+import Heading from '../components/Heading';
 import BenefitListItem from '../components/BenefitListItem';
 
 const BenefitsPage = styled.section`
@@ -52,7 +55,7 @@ function Benefits() {
         .then((response) => {
           const benefitsData = response.data;
           const refreshedHeaders = response.config.headers;
-          console.log(response.data);
+
           setBenefits(benefitsData);
           setHeaders(refreshedHeaders);
         })

@@ -91,7 +91,7 @@ function BenefitListItem({
         </p>
         <p>
           <i className="material-icons">date_range</i>
-          <strong>{remainingDaysBeforeStart || 0}</strong> remaining days before start
+          <strong>{remainingDaysBeforeStart || 0}</strong> remaining day{remainingDaysBeforeStart > 0 ? 's' : ''} before start
         </p>
       </BenefitInformation>
       <BenefitFooter>
